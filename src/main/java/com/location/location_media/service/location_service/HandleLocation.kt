@@ -4,7 +4,7 @@ import com.location.location_media.data.User
 import com.location.location_media.data.UserLocation
 
 interface HandleLocation {
-    fun saveLocation(myLocation: UserLocation)
+    fun saveLocation(userLocation: UserLocation)
 
     fun getLocationByUsers(users: List<User>): List<UserLocation>
 }
