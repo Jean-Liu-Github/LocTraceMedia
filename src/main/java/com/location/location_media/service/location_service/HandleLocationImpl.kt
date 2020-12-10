@@ -2,6 +2,8 @@ package com.location.location_media.service.location_service
 
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONObject
+import com.location.location_media.Moshi
+import com.location.location_media.data.User
 import com.location.location_media.data.UserLocation
 import com.location.location_media.service.redis_service.RedisService
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +21,7 @@ class HandleLocationImpl: HandleLocation {
     override fun getLocationsByUsers(user_ids: List<Int>): List<UserLocation?> {
         return user_ids.map { user_id ->
             redisService.getVal(user_id.toString())?.let {
-                JSONObject.toJavaObject(JSON.parseObject(it as String), UserLocation::class.java)
+                Moshi.toJavaObject(it as String, UserLocation::class)
             }
         }
     }
