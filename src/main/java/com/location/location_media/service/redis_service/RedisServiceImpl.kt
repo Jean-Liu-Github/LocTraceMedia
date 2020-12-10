@@ -1,7 +1,8 @@
 package com.location.location_media.service.redis_service
 
-import com.location.location_media.data.UserLocation
+import com.alibaba.fastjson.JSON
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.geo.Point
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
 import java.util.concurrent.TimeUnit
@@ -35,5 +36,25 @@ class RedisServiceImpl: RedisService {
         redisTemplate.opsForValue().setIfAbsent(key, value, timeOut, timeUnit)
     }
 
+    override fun <T> leftPush(
+            key: String,
+            value: T
+    ) {
+        redisTemplate.opsForList().leftPush(key, value)
+    }
+
+    override fun rightPop(key: String): Any? {
+        return redisTemplate.opsForList().rightPop(key)
+    }
+
+    override fun <T> geoAdd(key: String, member: String, longitude: Double, latitude: Double) {
+        redisTemplate.opsForGeo().add(key, Point(latitude, longitude), member)
+    }
+
+
+
+    fun test() {
+        redisTemplate.opsForGeo()
+    }
 
 }

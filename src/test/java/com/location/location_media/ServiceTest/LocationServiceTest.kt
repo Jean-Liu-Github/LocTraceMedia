@@ -31,6 +31,6 @@ class LocationServiceTest {
 
     @Test
     fun getUserLocation() {
-        println(JSON.toJSONString(handleLocation.getLocationByUsers(listOf(User(id = 1, name = "Jean Liu")))))
+        println(JSON.toJSONString(handleLocation.getLocationsByUsers(listOf(1))))
     }
 }

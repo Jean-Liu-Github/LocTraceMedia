@@ -6,5 +6,5 @@ import com.location.location_media.data.UserLocation
 interface HandleLocation {
     fun saveLocation(userLocation: UserLocation)
 
-    fun getLocationByUsers(users: List<User>): List<UserLocation>
+    fun getLocationsByUsers(user_ids: List<Int>): List<UserLocation?>
 }

@@ -30,7 +30,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.4.0'
     implementation 'redis.clients:jedis:'
     implementation 'junit:junit:4.12'
-    implementation 'com.alibaba:fastjson:1.2.75'
+    implementation 'com.alibaba:fastjson:1.2.32'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.8.0'
 }
 
 test {
