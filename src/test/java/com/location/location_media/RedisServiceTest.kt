@@ -1,5 +1,6 @@
 package com.location.location_media
 
+import com.location.location_media.data.User
 import com.location.location_media.service.redis_service.RedisService
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,4 +30,5 @@ class RedisServiceTest {
         redisService.delete("me")
         assert(redisService.getVal("me") == null)
     }
+
 }

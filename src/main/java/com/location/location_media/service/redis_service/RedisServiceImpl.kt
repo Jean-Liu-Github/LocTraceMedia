@@ -1,6 +1,6 @@
 package com.location.location_media.service.redis_service
 
-import com.alibaba.fastjson.JSON
+import com.location.location_media.Moshi
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.geo.Point
 import org.springframework.data.redis.core.RedisTemplate
@@ -10,13 +10,17 @@ import java.util.concurrent.TimeUnit
 @Service
 class RedisServiceImpl: RedisService {
     @Autowired
-    lateinit var redisTemplate : RedisTemplate<String, Any?>
+    lateinit var redisTemplate : RedisTemplate<String, String>
 
     override fun <T> setNX(
             key : String,
             value : T,
     ) : Unit {
-        redisTemplate.opsForValue().setIfAbsent(key, value)
+        redisTemplate.opsForValue().setIfAbsent(key, Moshi.toJson(value, T::class))
+    }
+
+    override fun <T> set(key: String, value: T) {
+        redisTemplate.opsForValue().set(key, value)
     }
 
     override fun getVal(key: String): Any? {
