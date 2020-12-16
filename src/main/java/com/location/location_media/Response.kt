@@ -8,8 +8,8 @@ class Response {
         fun successJson(): String {
             val successJson = JSONObject()
 
-            successJson.put(key = "code", value = "200")
-            successJson.put(key = "mes", value = "Success")
+            successJson["code"] = "200"
+            successJson["mes"] = "Success"
 
             return JSON.toJSONString(successJson)
         }
@@ -17,9 +17,9 @@ class Response {
         fun <T> dataJson(data: T): String {
             val dataJson = JSONObject()
 
-            dataJson.put(key = "code", value = "200")
-            dataJson.put(key = "mes", value = "Success")
-            dataJson.put(key = "data", value = data)
+            dataJson["code"] = "200"
+            dataJson["data"] = data
+            dataJson["mes"] = "Success"
 
             return JSON.toJSONString(dataJson)
         }

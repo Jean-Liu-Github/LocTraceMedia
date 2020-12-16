@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @RunWith(value = SpringRunner::class)
 @SpringBootTest(classes = [LocationMediaApplication::class])
@@ -23,7 +24,7 @@ class LocationServiceTest {
     fun saveUserLocation() {
         val userLocation = UserLocation(
                 user = User(id = 1, name = "Jean Liu"),
-                location = Location(latitude = 100.0, longitude = 200.0, now = LocalDate.now())
+                location = Location(latitude = 100.0, longitude = 200.0, now = LocalDateTime.now())
         )
 
         handleLocation.saveLocation(userLocation)
@@ -31,6 +32,6 @@ class LocationServiceTest {
 
     @Test
     fun getUserLocation() {
-        println(JSON.toJSONString(handleLocation.getLocationsByUsers(listOf(1))))
+        println(JSON.toJSONString(handleLocation.getLocation(1)))
     }
 }

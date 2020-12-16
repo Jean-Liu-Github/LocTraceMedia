@@ -26,13 +26,13 @@ class HandleLocationController {
     fun list(
             @RequestParam("user_ids") user_ids: List<Int>
     ): String {
-        return Response.dataJson(handleLocation.getLocationsByUsers(user_ids))
+        return Response.dataJson(handleLocation.getLocations(user_ids))
     }
 
     @GetMapping(value = ["/user/location/one"])
     fun one(
             @RequestParam("user_id") user_id: Int
     ): String {
-        return Response.dataJson(handleLocation.getLocationsByUsers(Arrays.asList(user_id))?.first())
+        return Response.dataJson(handleLocation.getLocations(Arrays.asList(user_id))?.first())
     }
 }

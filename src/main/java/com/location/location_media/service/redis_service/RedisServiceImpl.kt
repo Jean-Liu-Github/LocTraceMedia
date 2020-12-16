@@ -1,6 +1,5 @@
 package com.location.location_media.service.redis_service
 
-import com.location.location_media.Moshi
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.geo.Point
 import org.springframework.data.redis.core.RedisTemplate
@@ -10,13 +9,15 @@ import java.util.concurrent.TimeUnit
 @Service
 class RedisServiceImpl: RedisService {
     @Autowired
-    lateinit var redisTemplate : RedisTemplate<String, String>
+    lateinit var redisTemplate : RedisTemplate<String, Any?>
+    @Autowired
+    lateinit var redisTemplate2 : RedisTemplate<String, String>
 
     override fun <T> setNX(
             key : String,
             value : T,
     ) : Unit {
-        redisTemplate.opsForValue().setIfAbsent(key, Moshi.toJson(value, T::class))
+        redisTemplate.opsForValue().setIfAbsent(key, value)
     }
 
     override fun <T> set(key: String, value: T) {
@@ -54,11 +55,4 @@ class RedisServiceImpl: RedisService {
     override fun <T> geoAdd(key: String, member: String, longitude: Double, latitude: Double) {
         redisTemplate.opsForGeo().add(key, Point(latitude, longitude), member)
     }
-
-
-
-    fun test() {
-        redisTemplate.opsForGeo()
-    }
-
 }

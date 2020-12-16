@@ -15,13 +15,19 @@ class HandleLocationImpl: HandleLocation {
     private lateinit var redisService : RedisService
 
     override fun saveLocation(userLocation: UserLocation) {
-        redisService.setNX(userLocation.user.id.toString(), Moshi.toJson(userLocation, UserLocation::class))
+        redisService.set(userLocation.user.id.toString(), userLocation)
     }
 
-    override fun getLocationsByUsers(user_ids: List<Int>): List<UserLocation?> {
+    override fun getLocation(user_id: Int): UserLocation? {
+        return redisService.getVal(user_id.toString())?.let {
+            JSON.parseObject(JSON.toJSONString(it), UserLocation::class.java)
+        }
+    }
+
+    override fun getLocations(user_ids: List<Int>): List<UserLocation?> {
         return user_ids.map { user_id ->
             redisService.getVal(user_id.toString())?.let {
-                Moshi.fromJson(it as String, UserLocation::class)
+                JSON.parseObject(JSON.toJSONString(it), UserLocation::class.java)
             }
         }
     }
