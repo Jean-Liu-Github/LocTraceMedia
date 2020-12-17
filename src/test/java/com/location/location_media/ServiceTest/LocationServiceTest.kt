@@ -31,7 +31,12 @@ class LocationServiceTest {
     }
 
     @Test
+    fun updateLocationAllow() {
+        handleLocation.updateLocationAllow(key = "1", allow = true)
+    }
+
+    @Test
     fun getUserLocation() {
-        println(JSON.toJSONString(handleLocation.getLocation(1)))
+        println(JSON.toJSONString(handleLocation.getLocations(listOf(1, 2))))
     }
 }

@@ -1,5 +1,6 @@
 package com.location.location_media
 
+import com.location.location_media.data.Location
 import com.location.location_media.data.User
 import com.location.location_media.service.redis_service.RedisService
 import org.junit.Test
@@ -7,6 +8,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
+import java.time.LocalDateTime
 
 @RunWith(value = SpringRunner::class)
 @SpringBootTest(classes = [LocationMediaApplication::class])
@@ -29,6 +31,11 @@ class RedisServiceTest {
     fun test_delete() {
         redisService.delete("me")
         assert(redisService.getVal("me") == null)
+    }
+
+    @Test
+    fun test_set_map() {
+        redisService.setMap("4", "location", Location(latitude = 100.0, longitude = 200.0, now = LocalDateTime.now()))
     }
 
 }

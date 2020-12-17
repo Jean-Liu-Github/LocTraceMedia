@@ -1,12 +1,37 @@
 package com.location.location_media.data
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize
-import com.squareup.moshi.JsonClass
 import java.io.Serializable
 
-@JsonClass(generateAdapter = true)
-@JsonSerialize
-data class UserLocation(
+data class UserLocation (
         var user: User,
         var location: Location,
-)
+        var allow: Boolean = false,
+) : Serializable {
+
+    fun hashValue(hashKey: String): Any? {
+        return when(hashKey) {
+            "user" -> user
+            "location" -> location
+            "allow" -> allow
+            else -> null
+        }
+    }
+
+    fun hashKeys(): Array<String> {
+        return arrayOf("user", "location", "allow")
+    }
+
+    companion object {
+        fun userHashKey(): String {
+            return "user";
+        }
+
+        fun locationHashKey(): String {
+            return "location";
+        }
+
+        fun allowHashKey(): String {
+            return "allow";
+        }
+    }
+}

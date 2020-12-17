@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping(path = ["/loc-media"], produces = [MediaType.APPLICATION_JSON_VALUE])
+@RequestMapping(path = ["/loc-media"], produces = [MediaType.APPLICATION_JSON_VALUE], consumes = [MediaType.APPLICATION_JSON_VALUE])
 class HandleLocationController {
     @Autowired
     lateinit var handleLocation: HandleLocation
