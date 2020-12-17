@@ -12,7 +12,7 @@ import java.util.*
 @RequestMapping(path = ["/loc-media"], produces = [MediaType.APPLICATION_JSON_VALUE], consumes = [MediaType.APPLICATION_JSON_VALUE])
 class HandleLocationController {
     @Autowired
-    lateinit var handleLocation: HandleLocation
+    private lateinit var handleLocation: HandleLocation
 
     @PutMapping(value = ["/user/location"])
     fun save(

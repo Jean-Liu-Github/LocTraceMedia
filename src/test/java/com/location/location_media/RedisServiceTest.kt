@@ -38,4 +38,14 @@ class RedisServiceTest {
         redisService.setMap("4", "location", Location(latitude = 100.0, longitude = 200.0, now = LocalDateTime.now()))
     }
 
+    @Test
+    fun test_left_push() {
+        redisService.leftPush("users", User(id = 1, name = "Jean Liu"))
+    }
+
+    @Test
+    fun test_range() {
+        println(redisService.listRangeAll("ALL_USERS"))
+    }
+
 }

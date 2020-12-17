@@ -7,6 +7,7 @@ interface RedisService {
     fun delete(key: String): Unit
     fun <T> leftPush(key: String, value: T): Unit
     fun rightPop(key: String): Any?
+    fun listRangeAll(key: String): List<Any?>
     fun <T> geoAdd(key: String, member: String, longitude: Double, latitude: Double)
     fun getMap(key: String, hashKey: String): Any?
     fun <T> setMap(key: String, hashKey: String, value: T): Unit

@@ -34,6 +34,15 @@ class RedisServiceImpl: RedisService {
         return redisTemplate.opsForValue().get(key)
     }
 
+    fun <T> setENX(
+            key : String,
+            value : T,
+            timeOut : Long,
+            timeUnit : TimeUnit
+    ): Unit {
+        redisTemplate.opsForValue().setIfAbsent(key, value, timeOut, timeUnit)
+    }
+
     override fun delete(key: String) {
         redisTemplate.delete(key)
     }
@@ -46,24 +55,21 @@ class RedisServiceImpl: RedisService {
         redisTemplate.opsForHash<String, Any?>().put(key, hashKey, value)
     }
 
-    fun <T> setENX(
-            key : String,
-            value : T,
-            timeOut : Long,
-            timeUnit : TimeUnit
-    ): Unit {
-        redisTemplate.opsForValue().setIfAbsent(key, value, timeOut, timeUnit)
-    }
-
     override fun <T> leftPush(
             key: String,
             value: T
     ) {
-        redisTemplate.opsForList().leftPush(key, redisTemplate.opsForValue())
+        redisTemplate.opsForList().leftPush(key, value)
     }
 
     override fun rightPop(key: String): Any? {
         return redisTemplate.opsForList().rightPop(key)
+    }
+
+    override fun listRangeAll(key: String): List<Any?> {
+        return redisTemplate.opsForList().size(key)?.let {
+            redisTemplate.opsForList().range(key, 0, it)
+        } ?: emptyList()
     }
 
     override fun <T> geoAdd(key: String, member: String, longitude: Double, latitude: Double) {
