@@ -13,6 +13,7 @@ class HandleUserImpl : HandleUser {
     private lateinit var redisService : RedisService
 
     override fun saveUser(user: User) {
+        user.id = (redisService.listSize(ALL_USERS) + 1).toInt()
         redisService.leftPush(ALL_USERS, user)
     }
 

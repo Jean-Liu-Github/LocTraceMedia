@@ -72,6 +72,10 @@ class RedisServiceImpl: RedisService {
         } ?: emptyList()
     }
 
+    override fun listSize(key: String): Long {
+        return redisTemplate.opsForList().size(key) ?: 0
+    }
+
     override fun <T> geoAdd(key: String, member: String, longitude: Double, latitude: Double) {
         redisTemplate.opsForGeo().add(key, Point(latitude, longitude), member)
     }
