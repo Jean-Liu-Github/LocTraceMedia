@@ -4,16 +4,14 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlin.reflect.KClass
 
-class Moshi {
-    companion object {
-        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+object Moshi {
+    val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
-        fun <T : Any> fromJson(json: String, kotlinClass: KClass<T>): T? {
-            return moshi.adapter(kotlinClass.java).fromJson(json)
-        }
+    fun <T : Any> fromJson(json: String, kotlinClass: KClass<T>): T? {
+        return moshi.adapter(kotlinClass.java).fromJson(json)
+    }
 
-        fun <T : Any> toJson(obj: T, kotlinClass: KClass<T>): String {
-            return moshi.adapter(kotlinClass.java).toJson(obj)
-        }
+    fun <T : Any> toJson(obj: T, kotlinClass: KClass<T>): String {
+        return moshi.adapter(kotlinClass.java).toJson(obj)
     }
 }
