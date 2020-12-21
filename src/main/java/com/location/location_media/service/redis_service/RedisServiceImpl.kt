@@ -72,8 +72,16 @@ class RedisServiceImpl: RedisService {
         } ?: emptyList()
     }
 
-    override fun listSize(key: String): Long {
-        return redisTemplate.opsForList().size(key) ?: 0
+    override fun listSize(key: String): Int {
+        return redisTemplate.opsForList().size(key)?.toInt() ?: 0
+    }
+
+    override fun listClear(key: String): Int {
+        val num = listSize(key)
+        while (listSize(key) > 0) {
+            redisTemplate.opsForList().rightPop(key)
+        }
+        return num.toInt()
     }
 
     override fun <T> geoAdd(key: String, member: String, longitude: Double, latitude: Double) {

@@ -1,5 +1,6 @@
 package com.location.location_media.service.user_service
 
+import com.alibaba.fastjson.JSONObject
 import com.location.location_media.Response
 import com.location.location_media.data.User
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,7 +15,7 @@ class HandleUserController {
     @PostMapping(value = ["/user"])
     fun saveUser(@RequestBody user: User): String {
         handleUser.saveUser(user)
-        return Response.successJson()
+        return Response.dataJson(user)
     }
 
     @GetMapping(value = ["/user/all"])

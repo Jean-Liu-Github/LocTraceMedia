@@ -12,7 +12,8 @@ interface RedisService {
     fun <T> leftPush(key: String, value: T): Unit
     fun rightPop(key: String): Any?
     fun listRangeAll(key: String): List<Any?>
-    fun listSize(key: String): Long
+    fun listSize(key: String): Int
+    fun listClear(key: String): Int
 
     fun <T> geoAdd(key: String, member: String, longitude: Double, latitude: Double)
 }

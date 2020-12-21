@@ -48,4 +48,9 @@ class RedisServiceTest {
         println(redisService.listRangeAll("ALL_USERS"))
     }
 
+    @Test
+    fun test_list_clear() {
+        println(redisService.listClear("ALL_USERS"))
+    }
+
 }
