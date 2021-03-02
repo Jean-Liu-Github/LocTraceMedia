@@ -31,11 +31,12 @@ class LocationServiceTest {
 
     @Test
     fun updateLocationAllow() {
-        handleLocation.updateLocationAllow(key = "1", allow = true)
+        handleLocation.updateLocationAllow(key = "2", allow = true)
     }
 
     @Test
     fun getUserLocation() {
+        handleLocation.updateLocationAllow(key = "2", allow = true)
         println(JSON.toJSONString(handleLocation.getLocations(listOf(1, 2))))
     }
 }

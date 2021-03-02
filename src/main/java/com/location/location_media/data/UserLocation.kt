@@ -1,11 +1,12 @@
 package com.location.location_media.data
 
+import com.alibaba.fastjson.annotation.JSONField
 import java.io.Serializable
 
 data class UserLocation (
         var user: User,
         var location: Location,
-        var allow: Boolean = false,
+        var allow: Boolean = true,
 ) : Serializable {
 
     fun hashValue(hashKey: String): Any? {
