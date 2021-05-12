@@ -9,17 +9,21 @@ import org.springframework.stereotype.Service
 @Service
 class HandleUserImpl : HandleUser {
     private val ALL_USERS = "ALL_USERS"
-    @Autowired
-    private lateinit var redisService : RedisService
 
+    @Autowired
+    private lateinit var redisService: RedisService
+
+    @Synchronized
     override fun saveUser(user: User) {
-        user.id = (redisService.listSize(ALL_USERS) + 1).toInt()
+        user.id = (redisService.listSize(ALL_USERS) + 1)
         redisService.leftPush(ALL_USERS, user)
     }
 
     override fun getRegisterUsers(): List<User?> {
-        return redisService.listRangeAll(ALL_USERS).map { it?.let {
-            JSON.toObject(it, User::class)
-        } }
+        return redisService.listRangeAll(ALL_USERS).map {
+            it?.let {
+                JSON.toObject(it, User::class)
+            }
+        }
     }
 }

@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit
 import javax.annotation.Resource
 
 @Service
-class RedisServiceImpl: RedisService {
+class RedisServiceImpl : RedisService {
     @Autowired
-    lateinit var redisTemplate : RedisTemplate<String, Any?>
+    lateinit var redisTemplate: RedisTemplate<String, Any?>
 //    @Autowired
 //    lateinit var redisTemplate2 : RedisTemplate<String, String>
 
@@ -18,11 +18,11 @@ class RedisServiceImpl: RedisService {
 //    val key_value = redisTemplate.opsForValue()
 //    @Resource(name = "redisTemplate")
 //    val map = redisTemplate.opsForHash<String, Any?>()
-    
+
     override fun <T> setNX(
-            key : String,
-            value : T,
-    ) : Unit {
+            key: String,
+            value: T,
+    ): Unit {
         redisTemplate.opsForValue().setIfAbsent(key, value)
     }
 
@@ -35,10 +35,10 @@ class RedisServiceImpl: RedisService {
     }
 
     fun <T> setENX(
-            key : String,
-            value : T,
-            timeOut : Long,
-            timeUnit : TimeUnit
+            key: String,
+            value: T,
+            timeOut: Long,
+            timeUnit: TimeUnit
     ): Unit {
         redisTemplate.opsForValue().setIfAbsent(key, value, timeOut, timeUnit)
     }

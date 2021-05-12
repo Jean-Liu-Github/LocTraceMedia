@@ -26,6 +26,7 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.4.21'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -45,6 +46,13 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+
+tasks.withType(JavaCompile).configureEach {
+    javaCompiler = javaToolchains.compilerFor {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
@@ -54,4 +62,19 @@ compileTestKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+}
+
+// this is necessary if you want to put java source code in the kotlin directory
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+// update source
+// refer to https://stackoverflow.com/questions/28630470/upload-sources-to-nexus-repository-with-gradle
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+}
+artifacts {
+    archives sourcesJar
 }

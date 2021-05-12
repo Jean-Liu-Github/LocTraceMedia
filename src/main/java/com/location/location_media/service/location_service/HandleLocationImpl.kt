@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class HandleLocationImpl: HandleLocation {
+class HandleLocationImpl : HandleLocation {
     @Autowired
-    private lateinit var redisService : RedisService
+    private lateinit var redisService: RedisService
 
     override fun saveLocation(userLocation: UserLocation) {
         userLocation.hashKeys().forEach {

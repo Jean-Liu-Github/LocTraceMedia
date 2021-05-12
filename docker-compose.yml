@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  loc-media:
+    build: .
+    ports:
+    - "10110:9003"
+  redis:
+    image: "redis:alpine"

@@ -17,7 +17,7 @@ import java.time.LocalDateTime
 @SpringBootTest(classes = [LocationMediaApplication::class])
 class LocationServiceTest {
     @Autowired
-    private lateinit var handleLocation : HandleLocation
+    private lateinit var handleLocation: HandleLocation
 
     @Test
     fun saveUserLocation() {

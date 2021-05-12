@@ -33,6 +33,7 @@ class MoshiTest {
     @Test
     fun moshiToJson() {
         val user = User(id = 1, name = "Jean Liu")
+
         /** 记得添加KotlinJsonAdapterFactory **/
         val moshi = com.squareup.moshi.Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         println(moshi.adapter(User::class.java).toJson(user))
@@ -41,7 +42,7 @@ class MoshiTest {
 
     @Test
     fun last() {
-        println("abcdid".lastIndexOf("id").toString() +"abcdid"[4])
+        println("abcdid".lastIndexOf("id").toString() + "abcdid"[4])
     }
 
     @Test
